@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import com.cumt.game.domain.entity.ItemInfo;
 
+import java.io.InputStream;
+
 public class ShopActivity extends AppCompatActivity implements OnClickListener{
 
     private ItemInfo itemInfo;
@@ -26,6 +28,16 @@ public class ShopActivity extends AppCompatActivity implements OnClickListener{
         mNameTV.setText(itemInfo.getName() + "");
         mSpeedTV.setText("敏捷度+" + itemInfo.getSpeed());
         mAttackTV.setText("攻击力+" + itemInfo.getAcctack());
+        try {
+            InputStream is = getResources().openRawResource(R.raw.data);
+            byte [] buffer = new byte[is.available()] ;
+            is.read(buffer);
+            String json = new String(buffer,"utf-8");
+            System.out.println(json);
+            is.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
