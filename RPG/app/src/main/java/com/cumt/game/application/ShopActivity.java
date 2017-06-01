@@ -3,10 +3,14 @@ package com.cumt.game.application;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import com.cumt.game.domain.entity.ItemInfo;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.InputStream;
 
@@ -33,7 +37,8 @@ public class ShopActivity extends AppCompatActivity implements OnClickListener{
             byte [] buffer = new byte[is.available()] ;
             is.read(buffer);
             String json = new String(buffer,"utf-8");
-            System.out.println(json);
+            JSONArray jsonArray=new JSONArray(json);
+            Log.d("ShopActive", String.valueOf(jsonArray));
             is.close();
         } catch (Exception e) {
             e.printStackTrace();
