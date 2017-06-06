@@ -1,11 +1,11 @@
-package com.cumt.game.domain.repository.impl;
+package com.cumt.game.repository.impl;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.cumt.game.domain.repository.DataBaseHelper;
-import com.cumt.game.domain.repository.ShopDao;
+import com.cumt.game.repository.DataBaseHelper;
+import com.cumt.game.repository.ShopDao;
 
 import java.util.List;
 

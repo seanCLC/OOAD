@@ -1,8 +1,4 @@
-package com.cumt.game.domain.repository;
-
-import android.content.Context;
-
-import com.cumt.game.domain.entity.ItemInfo;
+package com.cumt.game.repository;
 
 import java.util.List;
 
@@ -14,7 +10,7 @@ public interface ShopDao {
     /**
      * 根据相应实体插入
      */
-    public void insert(Object obj,Class<?> clazz);
+    public void insert(Object obj, Class<?> clazz);
     /**
      * 根据相应实体id插入
      */
@@ -23,7 +19,7 @@ public interface ShopDao {
     /**
      * 根据相应实体更新数据
      */
-    public void update(Object obj,Class<?> clazz);
+    public void update(Object obj, Class<?> clazz);
 
     /**
      * 根据相应实体查询数据

@@ -1,8 +1,7 @@
-package com.cumt.game.domain.service;
+package com.cumt.game.service;
 
 import com.cumt.game.domain.entity.ItemInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

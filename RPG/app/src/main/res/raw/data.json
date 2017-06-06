@@ -1,5 +1,5 @@
 [
-  { "name": "金剑", "acctack":"20", "life": "25" , "speed": "10"},
-  { "name": "银剑", "acctack":"10", "life": "15" , "speed": "5"},
-  { "name": "铜剑", "acctack":"5", "life": "10" , "speed": "0" }
+  { "name": "金剑", "attack":"20", "life": "25" , "speed": "10"},
+  { "name": "银剑", "attack":"10", "life": "15" , "speed": "5"},
+  { "name": "铜剑", "attack":"5", "life": "10" , "speed": "0" }
 ]

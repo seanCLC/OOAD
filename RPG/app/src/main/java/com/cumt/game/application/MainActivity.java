@@ -8,7 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.cumt.game.domain.repository.DataBaseHelper;
+import com.cumt.game.repository.DataBaseHelper;
+
 
 public class MainActivity extends AppCompatActivity {
     private DataBaseHelper dataBaseHelper;

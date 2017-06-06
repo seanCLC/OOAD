@@ -1,4 +1,4 @@
-package com.cumt.game.domain.repository;
+package com.cumt.game.repository;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

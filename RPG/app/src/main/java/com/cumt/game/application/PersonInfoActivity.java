@@ -8,7 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.cumt.game.domain.entity.ItemInfo;
-import com.cumt.game.domain.repository.DataBaseHelper;
+import com.cumt.game.repository.DataBaseHelper;
 
 public class PersonInfoActivity extends AppCompatActivity {
     private ProgressBar mProgressBar1;
