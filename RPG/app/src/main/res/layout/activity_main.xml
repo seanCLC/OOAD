@@ -26,6 +26,8 @@
             android:id="@+id/first_info_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/first_shop_btn"
+            android:layout_marginRight="10dp"
             android:text="个人战力"
             android:onClick="infoClick"
             />
@@ -33,10 +35,19 @@
             android:id="@+id/first_shop_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/first_info_btn"
+            android:layout_centerHorizontal="true"
             android:text="游戏商城"
             android:onClick="shopClick"/>
+        <Button
+            android:id="@+id/go_fight_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/first_shop_btn"
+            android:layout_marginLeft="10dp"
+            android:text="前去战斗"
+            android:onClick="fightClick"/>
     </RelativeLayout>
+
 
 
 </LinearLayout>

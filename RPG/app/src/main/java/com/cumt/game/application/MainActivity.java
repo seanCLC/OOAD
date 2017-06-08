@@ -23,13 +23,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    //个人信息的点击事件
     public void infoClick(View view){
         Intent intent = new Intent(this,PersonInfoActivity.class);
         startActivity(intent);
     }
+    //商城按钮的点击事件
     public void shopClick(View view){
         Intent intent = new Intent(this,ShopActivity.class);
+        startActivity(intent);
+    }
+    //战斗按钮的点击事件
+    public void fightClick(View view){
+        Intent intent = new Intent(this,MapListActivity.class);
         startActivity(intent);
     }
 }
