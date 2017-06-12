@@ -1,9 +1,15 @@
 package com.cumt.game.domain.equipment;
 
 /**
- * Created by Administrator on 2017/6/8.
+ * 武器的抽象类
+ * Created by 雷祥 on 2017/6/8.
  */
 
-public class Weapon {
-    public int attack;
+public abstract class Weapon {
+    private final int attack = 0;
+
+    public int getAttack(){
+        return attack;
+    }
+
 }

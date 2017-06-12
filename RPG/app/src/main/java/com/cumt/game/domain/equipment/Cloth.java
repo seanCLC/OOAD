@@ -6,5 +6,9 @@ package com.cumt.game.domain.equipment;
  */
 
 public abstract class Cloth {
-    public int defend;
+    private final int defend = 0;
+
+    public int getDefend() {
+        return defend;
+    }
 }
