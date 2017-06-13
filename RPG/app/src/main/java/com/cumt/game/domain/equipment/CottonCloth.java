@@ -6,7 +6,7 @@ package com.cumt.game.domain.equipment;
  */
 
 public class CottonCloth extends Cloth {
-    private final int defend = 50;
+    private final int defend = 10;
 
     @Override
     public int getDefend() {

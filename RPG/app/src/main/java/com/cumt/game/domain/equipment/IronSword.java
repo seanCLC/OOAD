@@ -6,7 +6,7 @@ package com.cumt.game.domain.equipment;
  */
 
 public class IronSword extends Weapon {
-    private final int attack = 50;
+    private final int attack = 10;
 
     @Override
     public int getAttack() {
