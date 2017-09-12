@@ -14,40 +14,45 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
+/**
+ * 程序窗体
+ * @author leixiang
+ *
+ */
 public class Tetris extends JPanel{
 	/**
 	 * 下一个下落对象
 	 */
-	private Tetromino nextone;
+	protected Tetromino nextone;
 	/**
 	 * 当前下落对象
 	 */
-	private Tetromino tetromino;
+	protected Tetromino tetromino;
 	/**
 	 * 行，列
 	 */
-	private static final int ROWS = 20;
-	private static final int COLS = 10;
+	protected static final int ROWS = 20;
+	protected static final int COLS = 10;
 	/**
 	 * 提示信息
 	 */
-	private int score = 0;
-	private int lines = 0;
-	private int level = 5;
+	protected int score = 0;
+	protected int lines = 0;
+	protected int level = 5;
 	/**
 	 * 墙
 	 */
-	private Cell[][] wall = new Cell[ROWS][COLS];
+	protected Cell[][] wall = new Cell[ROWS][COLS];
 	/**
 	 * 各种状态，STATE 程序状态， BGI 背景图片状态
 	 */
-	private boolean STATE = true;
-	private int BGI = 0;
+	protected boolean STATE = true;
+	protected int BGI = 0;
 	/**
 	 * 格子长度的换算
 	 */
 	public static final int CELL_SIZE = 26;
+	//各种形状
 	public static BufferedImage Z;
 	public static BufferedImage S;
 	public static BufferedImage J;
@@ -55,243 +60,36 @@ public class Tetris extends JPanel{
 	public static BufferedImage O;
 	public static BufferedImage I;
 	public static BufferedImage T;
+	//程序背景图片
 	public static BufferedImage[] bgi = new BufferedImage[4];
-	public static BufferedImage pause;
+	//暂停时显示
+	public static BufferedImage pause;//
+	//程序背景
 	public static BufferedImage tetris;
+	//游戏结束图片
 	public static BufferedImage gameover;
 	static {
 		try {
-			Z = ImageIO.read(Tetris.class.getResource("Z.png"));
-			S = ImageIO.read(Tetris.class.getResource("S.png"));
-			J = ImageIO.read(Tetris.class.getResource("J.png"));
-			T = ImageIO.read(Tetris.class.getResource("T.png"));
-			O = ImageIO.read(Tetris.class.getResource("O.png"));
-			I = ImageIO.read(Tetris.class.getResource("I.png"));
-			L = ImageIO.read(Tetris.class.getResource("L.png"));
-			pause = ImageIO.read(Tetris.class.getResource("pause.png"));
-			tetris = ImageIO.read(Tetris.class.getResource("tetris1.png"));
-			gameover = ImageIO.read(Tetris.class.getResource("gameover.png"));
+			Z = ImageIO.read(Tetris.class.getResource("image/Z.png"));
+			//Z = ImageIO.read(Tetris.class.getResource("Z.png"));
+			S = ImageIO.read(Tetris.class.getResource("image/S.png"));
+			J = ImageIO.read(Tetris.class.getResource("image/J.png"));
+			T = ImageIO.read(Tetris.class.getResource("image/T.png"));
+			O = ImageIO.read(Tetris.class.getResource("image/O.png"));
+			I = ImageIO.read(Tetris.class.getResource("image/I.png"));
+			L = ImageIO.read(Tetris.class.getResource("image/L.png"));
+			pause = ImageIO.read(Tetris.class.getResource("image/pause.png"));
+			tetris = ImageIO.read(Tetris.class.getResource("image/tetris1.png"));
+			gameover = ImageIO.read(Tetris.class.getResource("image/gameover.png"));
 			for(int i = 0; i < bgi.length; i++) {
 				String name = "bgi0"+i+".jpg";
-				bgi[i] = ImageIO.read(Tetris.class.getResource(name));
+				bgi[i] = ImageIO.read(Tetris.class.getResource("image/"+name));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	/**
-	 * 
-	 */
-	public void action() {
-		tetromino = Tetromino.ranShape();
-		nextone = Tetromino.ranShape();
-	
-		KeyListener kl = new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				int k = e.getKeyCode();
-				keyMoveAction(k);
-				repaint();
-			}
-		};
-		//Tetris 是面板类型 l 监听 面板的动作
-		this.addKeyListener(kl);
-		this.setFocusable(true);
-		//request 请求  Focus 焦点  
-		this.requestFocus();
-		
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {
-		
-			int moveIndex = 0;
-			int bgiIndex = 0;
-			int speed = 5*level;
-			@Override
-			public void run() {
-				if (STATE) {
-					//speed = speed*level;
-					if (moveIndex % speed == 0) {
-						moveDownAction();
-						moveIndex = 0;
-					}
-				}
-				//testAction();
-				//isBottom();
-				moveIndex++;
-				bgiIndex++;
-				repaint();
-			}
-		};
-		timer.schedule(task, 10, 20);
-	}
-	public void changeBgiAction() {
-		
-	}
-	/**
-	 * 
-	 */
-	public void testAction() {
-		for (int i = 0; i < tetromino.cells.length; i++) {
-			System.out.println(tetromino.cells[i].getRow()+" "+tetromino.cells[i].getCol());
-		}
-	}
-	/**
-	 * @param k
-	 */
-	public void keyMoveAction(int k) {
-		switch (k) {
-			case KeyEvent.VK_RIGHT:moveRightAction();break;
-			case KeyEvent.VK_LEFT:moveLeftAction();break;
-			case KeyEvent.VK_DOWN:moveDownAction();break;
-			case KeyEvent.VK_UP:spinCellAction();break;
-			case KeyEvent.VK_I:moveInitAction();break;
-			case KeyEvent.VK_P:STATE = false;break;
-			case KeyEvent.VK_C:STATE = true;break; 
-			case KeyEvent.VK_E:System.exit(0);break;
-			
-		}
-	}
-	/**
-	 * 初始化方法
-	 */
-	public void moveInitAction() {
-		STATE = false;
-		wall = new Cell[ROWS][COLS];
-		tetromino = Tetromino.ranShape();
-		nextone = Tetromino.ranShape();
-		score = 0;
-		lines = 0;
-		level = 0;
-	}
-	/**
-	 * 旋转方法
-	 */
-	public void spinCellAction() {
-		Cell[] nCells = tetromino.spin(); 
-		if (nCells == null) return;
-		for (int i = 0; i < nCells.length; i++) {
-			int nRow = nCells[i].getRow();
-			int nCol = nCells[i].getCol();
-			//System.out.println(nRow+" "+nCol);
-			if (nRow < 0 || nRow >= ROWS || nCol < 0 || nCol >= COLS || wall[nRow][nCol] != null) return;
-		}
-		//System.out.println(111);
-		tetromino.cells = nCells;
-	}
-	/**
-	 * 
-	 */
-	public void moveLeftAction() {
-		if (canLeftMove()&&!isBottom()) {
-			tetromino.moveLeft();
-		}
-	}
-	/**
-	 * 
-	 */
-	public void moveRightAction() {
-		if (canRightMove()&&!isBottom()) {
-			tetromino.moveRight();
-		}
-	}
-	/**
-	 * 
-	 */
-	public void moveDownAction() {
-		if (tetromino == null) return;
-		if (!isBottom()) {
-			tetromino.moveDown();
-		}
-		
-	}
-	/**
-	 * 
-	 */
-	public void removeLine() {
-		boolean flag = true;
-		int rowStart = 20;
-		for (int row = 0; row < ROWS; row++) {
-			for (int col = 0; col < COLS; col++) {
-				if (wall[row][col] == null) {
-					flag = false;
-					break;
-				}
-			}
-			if (flag) {
-				for (int col = 0; col < COLS; col++) {
-					wall[row][col] = null;
-				} 
-				rowStart = row;
-				score += 10;
-				lines += 1;
-				level = lines%10 == 0?level == 1?level:level-1:level;
-				for (int row1 = rowStart; row1 > 0; row1--) {
-					for (int col1 = 0; col1 < COLS; col1++) {
-						wall[row1][col1] = wall[row1-1][col1];
-					}
-				}
-			}else {
-				flag = true;
-			}
-		}
-	}
-	/**
-	 * @return 是否可以继续下落
-	 */
-	public boolean isBottom() {
-		if (tetromino == null) return false;
-		Cell[] cells = tetromino.cells;
-		for (int i = 0; i < cells.length; i++) {
-			Cell c = cells[i];
-			int col = c.getCol();
-			int row = c.getRow();
-			//此处利用“||”的逻辑短路特点，减少代码量
-			if ((row+1) == ROWS || wall[row+1][col] != null) {
-				//当确定当前对象运动到底部即停止时，将该对象的cells内的格子元素存入wall内
-				for(int j = 0; j < cells.length; j++) {
-					Cell cell = cells[j];
-					int col1 = cell.getCol();
-					int row1 = cell.getRow();
-					wall[row1][col1] = cell;
-				}
-				removeLine();
-				//控制背景图片
-				BGI = (BGI == 3)?0:BGI+1;
-				tetromino = nextone;
-				nextone = Tetromino.ranShape();
-				return true;
-			}
-		}
-		return false;
-	}
-	/**
-	 * 判定是否可以右移
-	 * @return
-	 */
-	public boolean canRightMove() {
-		if (tetromino == null) return false;
-		Cell[] cells = tetromino.cells;
-		for (int i = 0; i < cells.length; i++) {
-			Cell c = cells[i];
-			int row = c.getRow();
-			int col = c.getCol();
-			if ((col+1) == COLS || wall[row][col+1] != null) return false;
-		}
-		return true;
-	}
-	/**
-	 * @return
-	 */
-	public boolean canLeftMove() {
-		if (tetromino == null) return false;
-		Cell[] cells = tetromino.cells;
-		for (int i = 0; i < cells.length; i++) {
-			Cell c = cells[i];
-			int row = c.getRow();
-			int col = c.getCol();
-			if (col == 0 || wall[row][col-1] != null) return false;
-		}
-		return true;
-	}
+
 
 
 	/* (non-Javadoc)
@@ -316,6 +114,7 @@ public class Tetris extends JPanel{
 		paintGameOver(g);
 	}
 	/**
+	 * 判断游戏是否结束
 	 * @return
 	 */
 	public boolean isGameOver() {
@@ -325,6 +124,7 @@ public class Tetris extends JPanel{
 		return false;
 	}
 	/**
+	 * 画游戏结束
 	 * @param g
 	 */
 	public void paintGameOver(Graphics g) {
@@ -342,6 +142,7 @@ public class Tetris extends JPanel{
 		}
 	}
 	/**
+	 * 画暂停
 	 * @param g
 	 */
 	public void paintGamePause(Graphics g){
@@ -350,6 +151,7 @@ public class Tetris extends JPanel{
 		}
 	}
 	/**
+	 * 画信息
 	 * @param g
 	 */
 	public void paintTabs(Graphics g) {
@@ -423,24 +225,6 @@ public class Tetris extends JPanel{
 				}
 			}
 		}
-	}
-	
-	public static void startTetris() {
-		JFrame frame = new JFrame();
-		
-		Tetris tetris = new Tetris();
-		
-		frame.add(tetris);
-		frame.setSize(525, 600);
-		frame.setLocationRelativeTo(null);
-		//frame.setUndecorated(true);
-		frame.setDefaultCloseOperation(
-				JFrame.EXIT_ON_CLOSE);
-		//显示窗口时候会尽快调用面板的paint()方法
-		//绘制显示的内容（绘制背景等）
-		frame.setVisible(true);
-		//被重写的paint（）方法绘制了图片！
-		tetris.action();
 	}
 	
 }
