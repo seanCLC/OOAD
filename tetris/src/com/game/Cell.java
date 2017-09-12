@@ -3,7 +3,7 @@ package com.game;
 import java.awt.image.BufferedImage;
 
 /**
- * 格子类
+ * 方块类父类
  *
  */
 public class Cell {
@@ -48,6 +48,7 @@ public class Cell {
 	 */
 	public void moveDown() {
 		row++;
+		
 	}
 	public void moveLeft() {
 		col--;

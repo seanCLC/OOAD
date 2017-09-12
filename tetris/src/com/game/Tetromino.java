@@ -3,12 +3,20 @@ package com.game;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import com.game.box.I;
+import com.game.box.J;
+import com.game.box.L;
+import com.game.box.O;
+import com.game.box.S;
+import com.game.box.T;
+import com.game.box.Z;
+
 
 public class Tetromino extends Cell{
 
 	protected Cell[] cells = new Cell[4];
 	
-	/*
+	/**
 	 * Tetromino类中的移动方法，通过重写和向上调用父类中方法实现
 	 * @see com.baishu.tetris.Cell#moveDown()
 	 */
@@ -27,8 +35,9 @@ public class Tetromino extends Cell{
 			cells[i].moveRight();
 		}
 	}
+	
 	/**
-	 * 返回随机形状参数
+	 * 随机生成方块形状
 	 */
 	public static Tetromino ranShape() {
 		Random random = new Random();
@@ -75,64 +84,4 @@ public class Tetromino extends Cell{
 		return str;
 	}
 }
-class J extends Tetromino {
-	public J() {
-		cells[0] = new Cell(2, 5, Tetris.J);
-		cells[1] = new Cell(0, 6, Tetris.J);
-		cells[2] = new Cell(2, 6, Tetris.J);
-		cells[3] = new Cell(1, 6, Tetris.J);
-	}
-}
-class L extends Tetromino {
-	
-	public L() {
-		cells[0] = new Cell(2, 6, Tetris.L);
-		cells[1] = new Cell(0, 5, Tetris.L);
-		cells[2] = new Cell(2, 5, Tetris.L);
-		cells[3] = new Cell(1, 5, Tetris.L);
-	}
-}
-class O extends Tetromino {
-	public O() {
-		cells[0] = new Cell(0, 5, Tetris.O);
-		cells[1] = new Cell(0, 6, Tetris.O);
-		cells[2] = new Cell(1, 5, Tetris.O);
-		cells[3] = new Cell(1, 6, Tetris.O);
-	}
-}
-class Z extends Tetromino {
-	/*
-	 * 实现cells中的四个格子的特殊排列
-	 * Tetris.Z代表特例图片（颜色）——来自Tetris类中加载的静态资源
-	 */
-	public Z() {
-		cells[0] = new Cell(0, 4, Tetris.Z);
-		cells[1] = new Cell(0, 5, Tetris.Z);
-		cells[2] = new Cell(1, 5, Tetris.Z);
-		cells[3] = new Cell(1, 6, Tetris.Z);
-	}
-}
-class S extends Tetromino {
-	public S() {
-		cells[0] = new Cell(1, 4, Tetris.S);
-		cells[1] = new Cell(1, 5, Tetris.S);
-		cells[2] = new Cell(0, 5, Tetris.S);
-		cells[3] = new Cell(0, 6, Tetris.S);
-	}
-}
-class I extends Tetromino {
-	public I() {
-		cells[0] = new Cell(0, 5, Tetris.I);
-		cells[1] = new Cell(1, 5, Tetris.I);
-		cells[2] = new Cell(2, 5, Tetris.I);
-		cells[3] = new Cell(3, 5, Tetris.I);
-	}
-}
-class T extends Tetromino {
-	public T() {
-		cells[0] = new Cell(0, 4, Tetris.T);
-		cells[1] = new Cell(0, 6, Tetris.T);
-		cells[2] = new Cell(0, 5, Tetris.T);
-		cells[3] = new Cell(1, 5, Tetris.T);
-	}
-}
+
