@@ -1,4 +1,4 @@
-package com.baishu.tetris;
+package com.game;
 
 import java.awt.image.BufferedImage;
 
@@ -7,7 +7,7 @@ public class CellCase {
 	private int col;
 	private BufferedImage image;
 	/*
-	 * set,get方法可以由IDE智能创建
+	 * set,get鏂规硶鍙互鐢盜DE鏅鸿兘鍒涘缓
 	 */
 	public int getRow() {
 		return row;
@@ -29,7 +29,7 @@ public class CellCase {
 	}
 	
 	/**
-	 * row代表行，格子下降即row+1
+	 * row浠ｈ〃琛岋紝鏍煎瓙涓嬮檷鍗硆ow+1
 	 */
 	public void moveDown() {
 		row++;

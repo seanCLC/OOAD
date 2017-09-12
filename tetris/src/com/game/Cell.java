@@ -1,7 +1,11 @@
-package com.baishu.tetris;
+package com.game;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * æ ¼å­ç±»
+ *
+ */
 public class Cell {
 	private int row;
 	private int col;
@@ -29,10 +33,10 @@ public class Cell {
 	public Cell() {
 	}
 	/**
-	 * ¸ñ×ÓµÄ¹¹Ôì·½·¨£¬³õÊ¼»¯Cell¶ÔÏóÓÃ
-	 * @param row	´«Èë¸ñ×ÓËùÔÚĞĞ
-	 * @param col	´«Èë¸ñ×ÓËùÔÚÁĞ
-	 * @param bhImage	´«Èë¸ñ×ÓÍ¼Æ¬£¨ÑÕÉ«£©
+	 * æ ¼å­çš„æ„é€ æ–¹æ³•ï¼Œåˆå§‹åŒ–Cellå¯¹è±¡ç”¨
+	 * @param row	ä¼ å…¥æ ¼å­æ‰€åœ¨è¡Œ
+	 * @param col	ä¼ å…¥æ ¼å­æ‰€åœ¨åˆ—
+	 * @param bhImage	ä¼ å…¥æ ¼å­å›¾ç‰‡ï¼ˆé¢œè‰²ï¼‰
 	 */
 	public Cell(int row, int col, BufferedImage bgImage) {
 		this.row 	 = row;
@@ -40,7 +44,7 @@ public class Cell {
 		this.bgImage = bgImage;
 	}
 	/**
-	 * ¸ñ×ÓµÄÏÂÂä£¬×óÒÆ£¬ÓÒÒÆ·½·¨
+	 * æ ¼å­çš„ä¸‹è½ï¼Œå·¦ç§»ï¼Œå³ç§»æ–¹æ³•
 	 */
 	public void moveDown() {
 		row++;

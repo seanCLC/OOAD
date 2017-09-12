@@ -1,4 +1,4 @@
-package com.baishu.tetris;
+package com.game;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,35 +17,35 @@ import javax.swing.JPanel;
 
 public class Tetris extends JPanel{
 	/**
-	 * ÏÂÒ»¸öÏÂÂä¶ÔÏó
+	 * ä¸‹ä¸€ä¸ªä¸‹è½å¯¹è±¡
 	 */
 	private Tetromino nextone;
 	/**
-	 * µ±Ç°ÏÂÂä¶ÔÏó
+	 * å½“å‰ä¸‹è½å¯¹è±¡
 	 */
 	private Tetromino tetromino;
 	/**
-	 * ĞĞ£¬ÁĞ
+	 * è¡Œï¼Œåˆ—
 	 */
 	private static final int ROWS = 20;
 	private static final int COLS = 10;
 	/**
-	 * ÌáÊ¾ĞÅÏ¢
+	 * æç¤ºä¿¡æ¯
 	 */
 	private int score = 0;
 	private int lines = 0;
 	private int level = 5;
 	/**
-	 * Ç½
+	 * å¢™
 	 */
 	private Cell[][] wall = new Cell[ROWS][COLS];
 	/**
-	 * ¸÷ÖÖ×´Ì¬£¬STATE ³ÌĞò×´Ì¬£¬ BGI ±³¾°Í¼Æ¬×´Ì¬
+	 * å„ç§çŠ¶æ€ï¼ŒSTATE ç¨‹åºçŠ¶æ€ï¼Œ BGI èƒŒæ™¯å›¾ç‰‡çŠ¶æ€
 	 */
 	private boolean STATE = true;
 	private int BGI = 0;
 	/**
-	 * ¸ñ×Ó³¤¶ÈµÄ»»Ëã
+	 * æ ¼å­é•¿åº¦çš„æ¢ç®—
 	 */
 	public static final int CELL_SIZE = 26;
 	public static BufferedImage Z;
@@ -93,10 +93,10 @@ public class Tetris extends JPanel{
 				repaint();
 			}
 		};
-		//Tetris ÊÇÃæ°åÀàĞÍ l ¼àÌı Ãæ°åµÄ¶¯×÷
+		//Tetris æ˜¯é¢æ¿ç±»å‹ l ç›‘å¬ é¢æ¿çš„åŠ¨ä½œ
 		this.addKeyListener(kl);
 		this.setFocusable(true);
-		//request ÇëÇó  Focus ½¹µã  
+		//request è¯·æ±‚  Focus ç„¦ç‚¹  
 		this.requestFocus();
 		
 		Timer timer = new Timer();
@@ -151,7 +151,7 @@ public class Tetris extends JPanel{
 		}
 	}
 	/**
-	 * ³õÊ¼»¯·½·¨
+	 * åˆå§‹åŒ–æ–¹æ³•
 	 */
 	public void moveInitAction() {
 		STATE = false;
@@ -163,7 +163,7 @@ public class Tetris extends JPanel{
 		level = 0;
 	}
 	/**
-	 * Ğı×ª·½·¨
+	 * æ—‹è½¬æ–¹æ³•
 	 */
 	public void spinCellAction() {
 		Cell[] nCells = tetromino.spin(); 
@@ -235,7 +235,7 @@ public class Tetris extends JPanel{
 		}
 	}
 	/**
-	 * @return ÊÇ·ñ¿ÉÒÔ¼ÌĞøÏÂÂä
+	 * @return æ˜¯å¦å¯ä»¥ç»§ç»­ä¸‹è½
 	 */
 	public boolean isBottom() {
 		if (tetromino == null) return false;
@@ -244,9 +244,9 @@ public class Tetris extends JPanel{
 			Cell c = cells[i];
 			int col = c.getCol();
 			int row = c.getRow();
-			//´Ë´¦ÀûÓÃ¡°||¡±µÄÂß¼­¶ÌÂ·ÌØµã£¬¼õÉÙ´úÂëÁ¿
+			//æ­¤å¤„åˆ©ç”¨â€œ||â€çš„é€»è¾‘çŸ­è·¯ç‰¹ç‚¹ï¼Œå‡å°‘ä»£ç é‡
 			if ((row+1) == ROWS || wall[row+1][col] != null) {
-				//µ±È·¶¨µ±Ç°¶ÔÏóÔË¶¯µ½µ×²¿¼´Í£Ö¹Ê±£¬½«¸Ã¶ÔÏóµÄcellsÄÚµÄ¸ñ×ÓÔªËØ´æÈëwallÄÚ
+				//å½“ç¡®å®šå½“å‰å¯¹è±¡è¿åŠ¨åˆ°åº•éƒ¨å³åœæ­¢æ—¶ï¼Œå°†è¯¥å¯¹è±¡çš„cellså†…çš„æ ¼å­å…ƒç´ å­˜å…¥wallå†…
 				for(int j = 0; j < cells.length; j++) {
 					Cell cell = cells[j];
 					int col1 = cell.getCol();
@@ -254,7 +254,7 @@ public class Tetris extends JPanel{
 					wall[row1][col1] = cell;
 				}
 				removeLine();
-				//¿ØÖÆ±³¾°Í¼Æ¬
+				//æ§åˆ¶èƒŒæ™¯å›¾ç‰‡
 				BGI = (BGI == 3)?0:BGI+1;
 				tetromino = nextone;
 				nextone = Tetromino.ranShape();
@@ -264,7 +264,7 @@ public class Tetris extends JPanel{
 		return false;
 	}
 	/**
-	 * ÅĞ¶¨ÊÇ·ñ¿ÉÒÔÓÒÒÆ
+	 * åˆ¤å®šæ˜¯å¦å¯ä»¥å³ç§»
 	 * @return
 	 */
 	public boolean canRightMove() {
@@ -303,16 +303,16 @@ public class Tetris extends JPanel{
 		g.drawImage(tetris, 0, 0, null);
 		g.translate(15, 15);
 		
-		//»­Ç½
+		//ç”»å¢™
 		paintWall(g);
-		//»­µ±Ç°ÏÂÂä¶ÔÏóºÍÔ¤±¸ÏÂÂä¶ÔÏó
+		//ç”»å½“å‰ä¸‹è½å¯¹è±¡å’Œé¢„å¤‡ä¸‹è½å¯¹è±¡
 		paintTetromino(g);
 		paintNextone(g);
-		//»­ÌáÊ¾ĞÅÏ¢£¬µÃ·Ö£¬Ïû³ıĞĞÊı£¬µÈ¼¶
+		//ç”»æç¤ºä¿¡æ¯ï¼Œå¾—åˆ†ï¼Œæ¶ˆé™¤è¡Œæ•°ï¼Œç­‰çº§
 		paintTabs(g);
-		//»­ÔİÍ£»­Ãæ
+		//ç”»æš‚åœç”»é¢
 		paintGamePause(g);
-		//»­GameOver»­Ãæ
+		//ç”»GameOverç”»é¢
 		paintGameOver(g);
 	}
 	/**
@@ -353,13 +353,13 @@ public class Tetris extends JPanel{
 	 * @param g
 	 */
 	public void paintTabs(Graphics g) {
-		//È·¶¨»æÖÆµÄµØµã
+		//ç¡®å®šç»˜åˆ¶çš„åœ°ç‚¹
 		int x = 410;
 		int y = 160;
-		//ÉèÖÃÑÕÉ«
+		//è®¾ç½®é¢œè‰²
 		Color color = new Color(240,234,34);
 		g.setColor(color);
-		//ÉèÖÃ×ÖÌå
+		//è®¾ç½®å­—ä½“
 		Font f = new Font(Font.SERIF,Font.BOLD,30);
 		g.setFont(f);
 		g.drawString(""+score, x, y);
@@ -369,7 +369,7 @@ public class Tetris extends JPanel{
 		g.drawString(""+level, x, y);
 	}
 	/**
-	 * »­Nextone
+	 * ç”»Nextone
 	 * @param g
 	 */
 	public void paintNextone(Graphics g) {
@@ -385,17 +385,17 @@ public class Tetris extends JPanel{
 		 }
 	}
 	/**
-	 * »­µ±Ç°tetromino
+	 * ç”»å½“å‰tetromino
 	 * @param g
 	 */
 	public void paintTetromino(Graphics g) {
-		//cells ÒıÓÃÁËÕıÔÚÏÂÂä·½¿éµÄ4¸ö¸ñ×ÓÊı×é
+		//cells å¼•ç”¨äº†æ­£åœ¨ä¸‹è½æ–¹å—çš„4ä¸ªæ ¼å­æ•°ç»„
 		if(tetromino == null)return;
 		
 		//System.out.println(tetromino == null);
 		Cell[] cells = tetromino.cells;
 		for(int i=0; i < cells.length; i++){
-			//c ÊÇÕıÔÚÏÂÂä·½¿éµÄÃ¿¸ö¸ñ×ÓµÄÒıÓÃ
+			//c æ˜¯æ­£åœ¨ä¸‹è½æ–¹å—çš„æ¯ä¸ªæ ¼å­çš„å¼•ç”¨
 			Cell c = cells[i];
 			int col = c.getCol();
 			int row = c.getRow();
@@ -406,7 +406,7 @@ public class Tetris extends JPanel{
 	}
 	
 	/**
-	 * »­Ç½
+	 * ç”»å¢™
 	 * @param g
 	 */
 	public void paintWall(Graphics g) {
@@ -436,10 +436,10 @@ public class Tetris extends JPanel{
 		//frame.setUndecorated(true);
 		frame.setDefaultCloseOperation(
 				JFrame.EXIT_ON_CLOSE);
-		//ÏÔÊ¾´°¿ÚÊ±ºò»á¾¡¿ìµ÷ÓÃÃæ°åµÄpaint()·½·¨
-		//»æÖÆÏÔÊ¾µÄÄÚÈİ£¨»æÖÆ±³¾°µÈ£©
+		//æ˜¾ç¤ºçª—å£æ—¶å€™ä¼šå°½å¿«è°ƒç”¨é¢æ¿çš„paint()æ–¹æ³•
+		//ç»˜åˆ¶æ˜¾ç¤ºçš„å†…å®¹ï¼ˆç»˜åˆ¶èƒŒæ™¯ç­‰ï¼‰
 		frame.setVisible(true);
-		//±»ÖØĞ´µÄpaint£¨£©·½·¨»æÖÆÁËÍ¼Æ¬£¡
+		//è¢«é‡å†™çš„paintï¼ˆï¼‰æ–¹æ³•ç»˜åˆ¶äº†å›¾ç‰‡ï¼
 		tetris.action();
 	}
 	

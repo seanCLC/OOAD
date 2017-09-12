@@ -1,6 +1,8 @@
-package com.baishu.tetris;
+package com.test;
 
 import org.junit.Test;
+
+import com.game.Tetromino;
 
 public class TestRanShape {
 	@Test

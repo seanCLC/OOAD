@@ -1,4 +1,4 @@
-package com.baishu.tetris;
+package com.game;
 
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -9,7 +9,7 @@ public class Tetromino extends Cell{
 	protected Cell[] cells = new Cell[4];
 	
 	/*
-	 * TetrominoÀàÖĞµÄÒÆ¶¯·½·¨£¬Í¨¹ıÖØĞ´ºÍÏòÉÏµ÷ÓÃ¸¸ÀàÖĞ·½·¨ÊµÏÖ
+	 * Tetrominoç±»ä¸­çš„ç§»åŠ¨æ–¹æ³•ï¼Œé€šè¿‡é‡å†™å’Œå‘ä¸Šè°ƒç”¨çˆ¶ç±»ä¸­æ–¹æ³•å®ç°
 	 * @see com.baishu.tetris.Cell#moveDown()
 	 */
 	public void moveDown() {
@@ -28,7 +28,7 @@ public class Tetromino extends Cell{
 		}
 	}
 	/**
-	 * ·µ»ØËæ»úĞÎ×´²ÎÊı
+	 * è¿”å›éšæœºå½¢çŠ¶å‚æ•°
 	 */
 	public static Tetromino ranShape() {
 		Random random = new Random();
@@ -45,11 +45,11 @@ public class Tetromino extends Cell{
 		return null;
 	}
 	/**
-	 * Tetromino¶ÔÏóĞı×ª·½·¨
-	 * @return Tetromino¶ÔÏóĞı×ª½á¹û£¬ÒÔCellÊı×éĞÎÊ½·µ»Ø£¬ÓÃÒÔÅĞ¶¨Ğı×ª½á¹ûÊÇ·ñºÏ·¨
+	 * Tetrominoå¯¹è±¡æ—‹è½¬æ–¹æ³•
+	 * @return Tetrominoå¯¹è±¡æ—‹è½¬ç»“æœï¼Œä»¥Cellæ•°ç»„å½¢å¼è¿”å›ï¼Œç”¨ä»¥åˆ¤å®šæ—‹è½¬ç»“æœæ˜¯å¦åˆæ³•
 	 */
 	public Cell[] spin() {
-		//ÒòÎªÑ§µÄ²»¶à£¬ÔİÊ±ÓÃÏÂ·½·¨ÅĞ¶ÏÊÇ·ñµ÷ÓÃ¶ÔÏóÎªOĞÍ¶ÔÏó,ÆäËû·½·¨ÔÚÀàÖĞÖØĞ´toString(),equals()µÈ
+		//å› ä¸ºå­¦çš„ä¸å¤šï¼Œæš‚æ—¶ç”¨ä¸‹æ–¹æ³•åˆ¤æ–­æ˜¯å¦è°ƒç”¨å¯¹è±¡ä¸ºOå‹å¯¹è±¡,å…¶ä»–æ–¹æ³•åœ¨ç±»ä¸­é‡å†™toString(),equals()ç­‰
 		if(this.getClass().equals(new O().getClass()))return null;
 		Cell[] iCells = new Cell[4];
 		int iRow = this.cells[2].getRow();
@@ -57,13 +57,13 @@ public class Tetromino extends Cell{
 		for (int i = 0; i < this.cells.length; i++) {
 			int nRow = this.cells[i].getRow();
 			int nCol = this.cells[i].getCol();
-			//¶ÔiCellsÄÚÔªËØ½øĞĞ³õÊ¼»¯£¬·ÀÖ¹³öÏÖnullPointExceptionÒì³£
+			//å¯¹iCellså†…å…ƒç´ è¿›è¡Œåˆå§‹åŒ–ï¼Œé˜²æ­¢å‡ºç°nullPointExceptionå¼‚å¸¸
 			iCells[i] = new Cell(iRow-iCol+nCol, iRow+iCol-nRow, this.cells[i].getBgImage());
 		}
 		return iCells;
 	}
 	/* 
-	 * ÖØĞ´toString() ·½·¨£¬ÎªÁËÄÜ¹»·½±ãµÄ²âÊÔ
+	 * é‡å†™toString() æ–¹æ³•ï¼Œä¸ºäº†èƒ½å¤Ÿæ–¹ä¾¿çš„æµ‹è¯•
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -102,8 +102,8 @@ class O extends Tetromino {
 }
 class Z extends Tetromino {
 	/*
-	 * ÊµÏÖcellsÖĞµÄËÄ¸ö¸ñ×ÓµÄÌØÊâÅÅÁĞ
-	 * Tetris.Z´ú±íÌØÀıÍ¼Æ¬£¨ÑÕÉ«£©¡ª¡ªÀ´×ÔTetrisÀàÖĞ¼ÓÔØµÄ¾²Ì¬×ÊÔ´
+	 * å®ç°cellsä¸­çš„å››ä¸ªæ ¼å­çš„ç‰¹æ®Šæ’åˆ—
+	 * Tetris.Zä»£è¡¨ç‰¹ä¾‹å›¾ç‰‡ï¼ˆé¢œè‰²ï¼‰â€”â€”æ¥è‡ªTetrisç±»ä¸­åŠ è½½çš„é™æ€èµ„æº
 	 */
 	public Z() {
 		cells[0] = new Cell(0, 4, Tetris.Z);
@@ -136,4 +136,3 @@ class T extends Tetromino {
 		cells[3] = new Cell(1, 5, Tetris.T);
 	}
 }
-
